@@ -1,8 +1,10 @@
-import mortabilityTables as mt
-import foo
-import json
 import pandas as pd
 import numpy as np
+import sys
+from PyQt6.QtWidgets import QApplication
+
+# internal
+from app import MainWindow
 
 def RentValue(property_value, bunch, annuitant_life_expectancy):
     return (property_value - bunch) / annuitant_life_expectancy
@@ -50,8 +52,8 @@ def Rentability(housing_value, bunch, rent, peoples, mortality_table=2022):
         total_years_of_rent
     )
 
-def GetTables(path='./tables_fr.xlsx'):
-    return pd.read_excel(path, engine="openpyxl", sheet_name=None)
+# def GetTables(path='./tables_fr.xlsx'):
+#     return pd.read_excel(path, engine="openpyxl", sheet_name=None)
 
 # # Main function for viager calculations
 # def Main(housing_value, bunch, rent, peoples, mortality_table=2022):
@@ -116,7 +118,7 @@ def GetTables(path='./tables_fr.xlsx'):
 
 # Main function for viager calculations with probability-based lifespan estimations
 def Main(housing_value, bunch, rent, peoples, mortality_table=2022, num_simulations=1000):
-    tables = GetTables()
+
 
     try:
         table = tables[str(mortality_table)]
@@ -197,10 +199,55 @@ def simulate_lifespan(table, age, mortality_column):
 
     return lifespan
 
-if __name__ == '__main__':
+# def Application():
+#     # You need one (and only one) QApplication instance per application.
+#     # Pass in sys.argv to allow command line arguments for your app.
+#     # If you know you won't use command line arguments QApplication([]) works too.
+#     app = QApplication([])
 
+#     # Create a Qt widget, which will be our window.
+#     window = MainWindow()
+#     window.show()       # IMPORTANT!!!!! Windows are hidden by default.
+
+#     # Start the event loop.
+#     app.exec()
+
+# class MainWindow(QMainWindow):
+#     def __init__(self):
+#         super().__init__()
+#         self.setWindowTitle("Does this viager is profitable ?")
+#         self.bt_validate_is_checked = True
+
+#         self.bt_validate = QPushButton('Start the simulation')
+#         self.bt_validate.setCheckable(True)
+#         self.bt_validate.clicked.connect(self.BtValidateClicked)
+#         self.bt_validate.clicked.connect(self.BtValidateToggled)
+#         self.bt_validate.released.connect(self.btValidateReleased)
+#         self.bt_validate.setChecked(self.bt_validate_is_checked)
+
+#         self.setFixedSize(QSize(400, 300)) # add a .setMinimumSize() and .setMaximumSize()
+#         self.setCentralWidget(self.bt_validate)
+
+#     def BtValidateClicked(self):
+#         print('clicked')
+
+#     def BtValidateToggled(self, checked):
+#         # self.bt_validate_checked = checked
+#         print("Checked?", checked)
+
+#     def btValidateReleased(self):
+#         self.bt_validate_is_checked = self.bt_validate.isChecked()
+
+#         print(self.bt_validate_is_checked)
+
+
+if __name__ == '__main__':
+    app = QApplication(sys.argv)
+    window = MainWindow()
+    window.show()
+    app.exec()
     # result = Rentability(200000, 30000, 800, [(70, 0), (65, 1)])
     #result = Main(200000, 30000, 800, [(70, 0), (65, 1)], mortality_table=2022) ,(71, 0),(71, 0),(71, 0),(71, 0),(71, 0),(71, 0),(71, 0)
-    result = Main(300000, 61000, 649, [(71, 0)], mortality_table=2022)
-    for key, value in result.items():
-        print(f"{key}: {value}")
+    # result = Main(300000, 61000, 649, [(71, 0)], mortality_table=2022)
+    # for key, value in result.items():
+    #     print(f"{key}: {value}")
