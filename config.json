@@ -1,0 +1,29 @@
+{
+    "Values":{
+        "Inputs":{
+            "Housing Value":true,
+            "Bunch":true,
+            "Monthly rent":true,
+            "Number of iterations":true,
+            "Mortality table year":true,
+            "Persons":true
+        },
+        "Globals":{
+            "Break-even Point (years)":true,
+            "Profitability Chance (%)": [0, 0.1]
+        },
+        "Uncertains":{
+            "A year of rent":false,
+            "Total Rent Cost":true,
+            "Total Investment":true,
+            "Profit":true,
+            "Profitability Percentage":true,
+            "Simulated Lifespan in years":true
+        },
+        "Uncertains stats":{
+            "quantils":[0.5, 0.95, 1],
+            "means":[[0, 1], [0.5, 1]]
+        }
+    }
+
+}

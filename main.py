@@ -199,50 +199,15 @@ def simulate_lifespan(table, age, mortality_column):
 
     return lifespan
 
-# def Application():
-#     # You need one (and only one) QApplication instance per application.
-#     # Pass in sys.argv to allow command line arguments for your app.
-#     # If you know you won't use command line arguments QApplication([]) works too.
-#     app = QApplication([])
-
-#     # Create a Qt widget, which will be our window.
-#     window = MainWindow()
-#     window.show()       # IMPORTANT!!!!! Windows are hidden by default.
-
-#     # Start the event loop.
-#     app.exec()
-
-# class MainWindow(QMainWindow):
-#     def __init__(self):
-#         super().__init__()
-#         self.setWindowTitle("Does this viager is profitable ?")
-#         self.bt_validate_is_checked = True
-
-#         self.bt_validate = QPushButton('Start the simulation')
-#         self.bt_validate.setCheckable(True)
-#         self.bt_validate.clicked.connect(self.BtValidateClicked)
-#         self.bt_validate.clicked.connect(self.BtValidateToggled)
-#         self.bt_validate.released.connect(self.btValidateReleased)
-#         self.bt_validate.setChecked(self.bt_validate_is_checked)
-
-#         self.setFixedSize(QSize(400, 300)) # add a .setMinimumSize() and .setMaximumSize()
-#         self.setCentralWidget(self.bt_validate)
-
-#     def BtValidateClicked(self):
-#         print('clicked')
-
-#     def BtValidateToggled(self, checked):
-#         # self.bt_validate_checked = checked
-#         print("Checked?", checked)
-
-#     def btValidateReleased(self):
-#         self.bt_validate_is_checked = self.bt_validate.isChecked()
-
-#         print(self.bt_validate_is_checked)
-
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
+    app.setStyleSheet("""
+        QPushButton {
+            padding: 3px 7px 3px 7px;
+        }
+    """)
+
     window = MainWindow()
     window.show()
     app.exec()
