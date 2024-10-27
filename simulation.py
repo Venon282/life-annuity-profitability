@@ -1,10 +1,9 @@
-from PyQt6.QtCore import QThread, pyqtSignal, Qt
-from PyQt6.QtWidgets import (QApplication, QMainWindow, QWidget, QLabel,
-                             QVBoxLayout, QPushButton, QProgressBar)
-
+from PyQt6.QtCore import QThread, pyqtSignal
 import numpy as np
-import pandas as pd
 import time
+
+def RentValue(property_value, bunch, annuitant_life_expectancy):
+    return (property_value - bunch) / annuitant_life_expectancy
 
 def precompute_lifespans(table):
     """Precompute lifespan probability arrays for each age and gender."""
@@ -58,7 +57,7 @@ class SimulationThread(QThread):
     progress = pyqtSignal(int)  # Signal to update progress
     finished = pyqtSignal(np.ndarray)  # Signal when done with results
 
-    def __init__(self, housing_value, bunch, rent, peoples, table, num_simulations):
+    def __init__(self, housing_value, bunch, rent, peoples, table, num_simulations=10000, loading_bar_update_rate=0.1):
         super().__init__()
         self.housing_value = housing_value
         self.bunch = bunch
@@ -66,13 +65,15 @@ class SimulationThread(QThread):
         self.peoples = peoples
         self.table = table
         self.num_simulations = num_simulations
+        self.loading_bar_update_rate = loading_bar_update_rate
 
     def run(self):
         # Simulate durations as before, with progress updates
         male_mortality, female_mortality = precompute_lifespans(self.table)
         results = []
+        lb_mod = max(int(self.num_simulations * self.loading_bar_update_rate), 1)
         for i in range(self.num_simulations):
             results.append(simulate_one_iteration(self.peoples, male_mortality, female_mortality))
-            if i % (self.num_simulations // 100) == 0:
+            if i % lb_mod == 0:
                 self.progress.emit(int((i / self.num_simulations) * 100))  # Emit progress
         self.finished.emit(np.array(results))  # Emit results when finished
