@@ -23,12 +23,12 @@ This application uses a Monte Carlo algorithm to simulate the expected lifespans
 - **Probabilistic Results:** By repeating this process, the app provides average, median, and potential high-lifespan scenarios, giving a range of possible outcomes for profitability.  
 
 ## Input Parameters
-Housing Value: Market value of the property.  
-Initial Payment (Bouquet): Upfront payment amount.  
-Monthly Rent: Monthly rent or annuity paid to the occupant(s).  
-People: A list of tuples with each occupant's age and gender (e.g., [(age1, gender1), (age2, gender2)] where gender is 0 for male and 1 for female).  
-Mortality Table: Year of the mortality data to use. Options depend on available data (e.g., 2022).  
-Number of Simulations: Number of Monte Carlo simulations to run (higher values yield more accurate statistical outcomes).  
+**Housing Value:** Market value of the property.  
+**Initial Payment (Bouquet):** Upfront payment amount.  
+**Monthly Rent:** Monthly rent or annuity paid to the occupant(s).  
+**People:** A list of tuples with each occupant's age and gender (e.g., [(age1, gender1), (age2, gender2)] where gender is 0 for male and 1 for female).  
+**Mortality Table:** Year of the mortality data to use. Options depend on available data (e.g., 2022).  
+**Number of Simulations:** Number of Monte Carlo simulations to run (higher values yield more accurate statistical outcomes).  
 
 ## Todo
 - When the result appear, get a windows bigger  
